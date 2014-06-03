@@ -1,0 +1,13 @@
+*.pyc
+.DS_Store
+.awskey
+.idea
+*~
+node_modules
+backup
+dist
+.tmp
+.sass-cache
+app/bower_components
+aws-keys.json
+app/data/*.json
