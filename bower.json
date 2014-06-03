@@ -1,0 +1,10 @@
+{
+  "name": "microbialomics",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.0.3",
+    "jquery": "~1.11.0",
+    "typeahead.js": "~0.10.2"
+  },
+  "devDependencies": {}
+}
