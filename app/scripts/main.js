@@ -24,3 +24,16 @@ $('.typeahead').typeahead(null, {
   // is compatible with the typeahead jQuery plugin
   source: strains.ttAdapter()
 });
+
+function renderNCBI() {
+    console.log('Render triggered.')
+}
+
+$('.typeahead').bind('typeahead:selected', function(obj, datum, name) {
+    console.log(obj);
+    console.log(datum);
+    console.log(name);
+    renderNCBI();
+});
+
+$('.typeahead').bind('keypress', function(event) { if (event.which === 13) { renderNCBI(); } } );
