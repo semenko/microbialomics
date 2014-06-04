@@ -17,7 +17,7 @@ strains.initialize();
 
 // passing in `null` for the `options` arguments will result in the default
 // options being used
-$('#prefetch .typeahead').typeahead(null, {
+$('.typeahead').typeahead(null, {
   name: 'strains',
   displayKey: 'name',
   // `ttAdapter` wraps the suggestion engine in an adapter that

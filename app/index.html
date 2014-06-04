@@ -1,118 +1,128 @@
 <!doctype html>
 <html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <title>Microbialomics / 93 Genomes</title>
-        <meta name="description" content="Gordon Lab Microbialomics / 93 Genomes Collection">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" href="/favicon.ico">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <!-- build:css styles/vendor.css -->
-        <!-- bower:css -->
-        <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
-        <!-- endbower -->
-        <!-- endbuild -->
-        <!-- build:css(.tmp) styles/main.css -->
-        <link rel="stylesheet" href="styles/main.css">
-        <!-- endbuild -->
-    </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>Microbialomics / 93 Genomes Collections</title>
+    <meta name="description" content="Gordon Lab Microbialomics at WashU / 93 Genomes Collections / 100 Genomes">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Nick Semenkovich (@semenko) https://nick.semenkovich.com/">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/sv-cleanup.css">
+    <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/ext-all.css">
+    <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/xtheme-gray.css" id="theme">
+    <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/style.css" media="screen, projection, print">
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
 
 
-    <!-- Fixed navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
+    <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/adapter/ext/ext-base.js"></script>
+    <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/ext-all.js"></script>
+    <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/sviewer/js/main.js"></script>
+    <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/jquery/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/genome/trackmgr/0.3/js/tms-extern-unfilt.js"></script>
+
+</head>
+<body>
+<!--[if lt IE 10]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Microbialomics</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top</a></li>
-          </ul>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#strains">Strain List</a></li>
+                <li><a href="#raw-data">Raw Data</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li></li>
+            </ul>
+
+            <form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control typeahead" placeholder="Search All Strains" size="50">
+                </div>
+                <!-- <button type="submit" class="btn btn-default">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button> //-->
+            </form>
+
         </div><!--/.nav-collapse -->
-      </div>
     </div>
+</div>
 
-    <div class="container">
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
-      </div>
-
-    </div> <!-- /container -->
+<div class="container">
 
 
-        <!-- build:js scripts/vendor.js -->
-        <!-- bower:js -->
-        <script src="../bower_components/jquery/dist/jquery.js"></script>
-        <script src="../bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
-        <!-- endbower -->
-        <!-- endbuild -->
+        <div id="sv1" class="SeqViewerApp" >
+            <a href= "?embedded=true&multipanel=true&slim=false&id=NC_010655.1"></a>
+        </div>
 
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+    <hr>
+    <footer>
+        <p>Provided by the <a href="http://gordonlab.wustl.edu/">Gordon Lab</a> at Washington University | Written by <a href="https://nick.semenkovich.com">Nick Semenkovich</a></p>
+    </footer>
+</div> <!-- /container -->
+
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+    (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='//www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
-        </script>
+        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+        e.src='//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X');ga('send','pageview');
+</script>
 
-        <!-- build:js scripts/plugins.js -->
-        <script src="../bower_components/bootstrap/js/affix.js"></script>
-        <script src="../bower_components/bootstrap/js/alert.js"></script>
-        <script src="../bower_components/bootstrap/js/dropdown.js"></script>
-        <script src="../bower_components/bootstrap/js/tooltip.js"></script>
-        <script src="../bower_components/bootstrap/js/modal.js"></script>
-        <script src="../bower_components/bootstrap/js/transition.js"></script>
-        <script src="../bower_components/bootstrap/js/button.js"></script>
-        <script src="../bower_components/bootstrap/js/popover.js"></script>
-        <script src="../bower_components/bootstrap/js/carousel.js"></script>
-        <script src="../bower_components/bootstrap/js/scrollspy.js"></script>
-        <script src="../bower_components/bootstrap/js/collapse.js"></script>
-        <script src="../bower_components/bootstrap/js/tab.js"></script>
+<!-- build:js scripts/plugins.js -->
+<script src="../bower_components/bootstrap/js/affix.js"></script>
+<script src="../bower_components/bootstrap/js/alert.js"></script>
+<script src="../bower_components/bootstrap/js/dropdown.js"></script>
+<script src="../bower_components/bootstrap/js/tooltip.js"></script>
+<script src="../bower_components/bootstrap/js/modal.js"></script>
+<script src="../bower_components/bootstrap/js/transition.js"></script>
+<script src="../bower_components/bootstrap/js/button.js"></script>
+<script src="../bower_components/bootstrap/js/popover.js"></script>
+<script src="../bower_components/bootstrap/js/carousel.js"></script>
+<script src="../bower_components/bootstrap/js/scrollspy.js"></script>
+<script src="../bower_components/bootstrap/js/collapse.js"></script>
+<script src="../bower_components/bootstrap/js/tab.js"></script>
 
-       <script src="../bower_components/typeahead.js/dist/typeahead.jquery.js"></script>
-               <script src="../bower_components/typeahead.js/dist/bloodhound.js"></script>
-        <!-- endbuild -->
+<script src="../bower_components/typeahead.js/dist/typeahead.jquery.js"></script>
+<script src="../bower_components/typeahead.js/dist/bloodhound.js"></script>
+<!-- endbuild -->
 
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+<!-- build:js({app,.tmp}) scripts/main.js -->
+<script src="scripts/main.js"></script>
+<!-- endbuild -->
 </body>
 </html>
