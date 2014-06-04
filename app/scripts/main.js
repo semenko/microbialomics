@@ -1,3 +1,5 @@
+"use strict";
+
 var strains = new Bloodhound({
     datumTokenizer: function(d) {
         return Bloodhound.tokenizers.whitespace(d['genus']).concat(Bloodhound.tokenizers.whitespace(d['species']));
@@ -6,34 +8,47 @@ var strains = new Bloodhound({
     limit: 10,
     prefetch: '../data/93genomes.json'
 });
-
-// kicks off the loading/processing of `local` and `prefetch`
+// Start loading the .json
 strains.initialize();
 
 var typeahead_field = $('.typeahead');
 
-// passing in `null` for the `options` arguments will result in the default
-// options being used
 typeahead_field.typeahead(null, {
     name: 'strains',
     displayKey: function(strain) { return strain['genus'] + " " + strain['species']; },
-    // `ttAdapter` wraps the suggestion engine in an adapter that
-    // is compatible with the typeahead jQuery plugin
     source: strains.ttAdapter()
 });
 
-function renderNCBI() {
+var factbox = $('.factbox');
+
+function renderNCBI(datum) {
     console.log('Render triggered.')
+    $('.jumbotron').hide();
+    factbox.show();
+
+    console.log(datum);
+
+    // Fill in our data table
+    factbox.find('.panel-title').text(datum['genus'] + " " + datum['species']);
+
+    Ext.onReady(function(){
+        var app = new SeqView.App('sv1');
+        app.load('embedded=true&multipanel=true&slim=false&id=NC_010655.1');
+    });
 }
 
 typeahead_field.bind('typeahead:selected', function(obj, datum, name) {
-    console.log(obj);
-    console.log(datum);
-    console.log(name);
-    renderNCBI();
+    renderNCBI(datum);
 });
 
-typeahead_field.bind('keypress', function(event) { if (event.which === 13) { renderNCBI(); } } );
+typeahead_field.bind('typeahead:autocompleted', function(obj, datum, name) {
+    renderNCBI(datum);
+});
 
-// TODO: REMOVE THIS LINE WHEN IN PROD!
+//typeahead_field.bind('keypress', function(event) { if (event.which === 13) { renderNCBI(); } } );
+
+
+// TODO: REMOVE THESE LINES WHEN IN PROD!
 strains.clearPrefetchCache();
+
+renderNCBI({"well":"A1","phylum":"Verrucomicrobia","genus":"Akkermansia","species":"muciniphila","atcc_id":"BAA-835","dsmz_id":"22959","ncbi_assembly":"https://www.ncbi.nlm.nih.gov/assembly/GCF_000020225.1/","refseq_ids":"NC_010655.1"});
