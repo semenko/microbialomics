@@ -10,6 +10,5 @@ dist
 .sass-cache
 app/bower_components
 aws-keys.json
-app/data/*.json
 bower_components
 test/bower_components
