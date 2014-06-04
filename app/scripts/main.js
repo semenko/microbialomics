@@ -7,7 +7,6 @@ var strains = new Bloodhound({
     // Converted Google Doc w/ strains to JSON via https://shancarter.github.io/mr-data-converter/
     url: '../data/93genomes.json',
     filter: function(list) {
-      console.log('filter!');
       return $.map(list, function(strain) { console.log(strain); return { name: strain['genus'] + " " + strain['species'] }; });
     }
   }
@@ -15,7 +14,7 @@ var strains = new Bloodhound({
 
 // kicks off the loading/processing of `local` and `prefetch`
 strains.initialize();
- console.log("load2");
+
 // passing in `null` for the `options` arguments will result in the default
 // options being used
 $('#prefetch .typeahead').typeahead(null, {
