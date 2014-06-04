@@ -1,15 +1,10 @@
 var strains = new Bloodhound({
-  datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+  datumTokenizer: function(d) {
+        return Bloodhound.tokenizers.whitespace(d['genus']).concat(Bloodhound.tokenizers.whitespace(d['species']));
+  },
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   limit: 10,
-  prefetch: {
-    // All our available strain data: Name, NCBI Url, ATCC / DSMZ IDs, NCBI info?
-    // Converted Google Doc w/ strains to JSON via https://shancarter.github.io/mr-data-converter/
-    url: '../data/93genomes.json',
-    filter: function(list) {
-      return $.map(list, function(strain) { console.log(strain); return { name: strain['genus'] + " " + strain['species'] }; });
-    }
-  }
+  prefetch: '../data/93genomes.json'
 });
 
 // kicks off the loading/processing of `local` and `prefetch`
@@ -19,7 +14,7 @@ strains.initialize();
 // options being used
 $('.typeahead').typeahead(null, {
   name: 'strains',
-  displayKey: 'name',
+  displayKey: function(strain) { return strain['genus'] + " " + strain['species']; },
   // `ttAdapter` wraps the suggestion engine in an adapter that
   // is compatible with the typeahead jQuery plugin
   source: strains.ttAdapter()
@@ -37,3 +32,6 @@ $('.typeahead').bind('typeahead:selected', function(obj, datum, name) {
 });
 
 $('.typeahead').bind('keypress', function(event) { if (event.which === 13) { renderNCBI(); } } );
+
+// TODO: REMOVE THIS LINE WHEN IN PROD!
+strains.clearPrefetchCache();
