@@ -21,28 +21,41 @@ typeahead_field.typeahead(null, {
 
 var factbox = $('.factbox');
 
-function renderNCBI(datum) {
-    console.log('Render triggered.')
+function renderPage(datum) {
+    console.log('Render triggered.');
     $('.jumbotron').hide();
     factbox.show();
 
     console.log(datum);
 
     // Fill in our data table
-    factbox.find('.panel-title').text(datum['genus'] + " " + datum['species']);
+    factbox.find('#dynamic-title').text(datum['genus'] + " " + datum['species']);
+    factbox.find('#dynamic-phylum').text(datum['phylum']);
+    factbox.find('#dynamic-atcc').text(datum['atcc_id']);
+    factbox.find('#dynamic-dsmz').text(datum['dsmz_id']);
+    factbox.find('#dynamic-well').text(datum['well']);
+    factbox.find('#dynamic-references').html('<a href="' + datum['ncbi_assembly'] + '" target="_blank">See NCBI Assembly <span class="glyphicon glyphicon glyphicon-share-alt"></span></a>');
 
+    // Make our RefSeq ID table
+
+
+//    renderNCBIviewer(datum['refseq_ids']);
+}
+
+function renderNCBIviewer(id) {
+    console.log('Rendering NCBI id: ' + id);
     Ext.onReady(function(){
         var app = new SeqView.App('sv1');
-        app.load('embedded=true&multipanel=true&slim=false&id=NC_010655.1');
+        app.load('embedded=true&multipanel=true&slim=false&id=' + id);
     });
 }
 
 typeahead_field.bind('typeahead:selected', function(obj, datum, name) {
-    renderNCBI(datum);
+    renderPage(datum);
 });
 
 typeahead_field.bind('typeahead:autocompleted', function(obj, datum, name) {
-    renderNCBI(datum);
+    renderPage(datum);
 });
 
 //typeahead_field.bind('keypress', function(event) { if (event.which === 13) { renderNCBI(); } } );
@@ -51,4 +64,4 @@ typeahead_field.bind('typeahead:autocompleted', function(obj, datum, name) {
 // TODO: REMOVE THESE LINES WHEN IN PROD!
 strains.clearPrefetchCache();
 
-renderNCBI({"well":"A1","phylum":"Verrucomicrobia","genus":"Akkermansia","species":"muciniphila","atcc_id":"BAA-835","dsmz_id":"22959","ncbi_assembly":"https://www.ncbi.nlm.nih.gov/assembly/GCF_000020225.1/","refseq_ids":"NC_010655.1"});
+renderPage({"well":"A1","phylum":"Verrucomicrobia","genus":"Akkermansia","species":"muciniphila","atcc_id":"BAA-835","dsmz_id":"22959","ncbi_assembly":"https://www.ncbi.nlm.nih.gov/assembly/GCF_000020225.1/","refseq_ids":"NC_010655.1"});

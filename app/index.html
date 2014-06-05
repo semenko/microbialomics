@@ -9,11 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
     <!--
-          <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/sv-cleanup.css">
-        <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/ext-all.css">
-        <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/xtheme-gray.css" id="theme">
-        <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/style.css" media="screen, projection, print">
-//-->
+              <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/sv-cleanup.css">
+            <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/ext-all.css">
+            <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/xtheme-gray.css" id="theme">
+            <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/style.css" media="screen, projection, print">
+    //-->
 
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -26,13 +26,6 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
-    <!--
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/adapter/ext/ext-base.js"></script>
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/ext-all.js"></script>
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/sviewer/js/main.js"></script>
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/jquery/jquery-1.7.2.js"></script>
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/genome/trackmgr/0.3/js/tms-extern-unfilt.js"></script>
-//-->
 
 </head>
 <body>
@@ -82,18 +75,72 @@
         <p>Please search for a strain in the upper right (or view the strain list).</p>
     </div>
 
-    <div class="factbox" style="display:none;">
+    <div class="factbox row" style="display:none;">
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">&nbsp;</h3>
-  </div>
-  <div class="panel-body">
+        <div class="col-md-8">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title" id="dynamic-title">&nbsp;</h3>
+                </div>
+                <div class="panel-body row">
+                    <div class="col-md-6">
+                        <table class="table table-condensed">
+                            <tbody>
+                            <tr>
+                                <td class="text-muted">Phylum</td>
+                                <td id="dynamic-phylum">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">ATCC ID</td>
+                                <td id="dynamic-atcc">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">DSMZ ID</td>
+                                <td id="dynamic-dsmz">&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-  </div>
-</div>
+                    <div class="col-md-6">
+                        <table class="table table-condensed">
+                            <tbody>
+                            <tr>
+                                <td class="text-muted">93G Well</td>
+                                <td id="dynamic-well">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="text-muted">References</td>
+                                <td id="dynamic-references">&nbsp;</td>
+                            </tr>
 
-    <div id="sv1" class="SeqViewerApp"></div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">NCBI RefSeq IDs</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed ">
+                        <tbody>
+                        <tr>
+                            <td></td>
+                            <td class="text-muted">(coming soon)</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- NCBI Placeholder //-->
+        <div id="sv1" class="SeqViewerApp"></div>
 
     </div>
 
@@ -122,6 +169,14 @@
     ga('create','UA-XXXXX-X');ga('send','pageview');
 </script>
 
+<!--
+        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/adapter/ext/ext-base.js"></script>
+        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/ext-all.js"></script>
+        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/sviewer/js/main.js"></script>
+        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/jquery/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/genome/trackmgr/0.3/js/tms-extern-unfilt.js"></script>
+//-->
+
 <!-- build:js scripts/plugins.js -->
 <script src="../bower_components/bootstrap/js/affix.js"></script>
 <script src="../bower_components/bootstrap/js/alert.js"></script>
@@ -143,5 +198,6 @@
 <!-- build:js({app,.tmp}) scripts/main.js -->
 <script src="scripts/main.js"></script>
 <!-- endbuild -->
+
 </body>
 </html>
