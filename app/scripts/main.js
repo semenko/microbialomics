@@ -5,7 +5,7 @@ var strains = new Bloodhound({
         return Bloodhound.tokenizers.whitespace(d['genus']).concat(Bloodhound.tokenizers.whitespace(d['species']));
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    limit: 10,
+    limit: 15,
     prefetch: '../data/93genomes.json'
 });
 // Start loading the .json
@@ -31,10 +31,26 @@ function renderPage(datum) {
     // Fill in our data table
     factbox.find('#dynamic-title').text(datum['genus'] + " " + datum['species']);
     factbox.find('#dynamic-phylum').text(datum['phylum']);
-    factbox.find('#dynamic-atcc').text(datum['atcc_id']);
-    factbox.find('#dynamic-dsmz').text(datum['dsmz_id']);
+    if (datum['atcc_id'] == "None") {
+        factbox.find('#dynamic-atcc').text("None");
+    } else {
+        factbox.find('#dynamic-atcc a').attr('href', datum['atcc_id']);
+        factbox.find('#dynamic-atcc a').text(datum['atcc_id']);
+    }
+
+    if (datum['dsmz_id'] == "None") {
+        factbox.find('#dynamic-dsmz').text("None");
+    } else {
+        factbox.find('#dynamic-dsmz a').attr('href', datum['dsmz_id']);
+        factbox.find('#dynamic-dsmz a').text(datum['dsmz_id']);
+    }
+
     factbox.find('#dynamic-well').text(datum['well']);
-    factbox.find('#dynamic-references').html('<a href="' + datum['ncbi_assembly'] + '" target="_blank">See NCBI Assembly <span class="glyphicon glyphicon glyphicon-share-alt"></span></a>');
+    if (datum['ncbi_assembly'] == "None") {
+        factbox.find('#dynamic-references').text('None');
+    } else {
+        factbox.find('#dynamic-references a').attr('href', datum['ncbi_assembly']);
+    }
 
     // Make our RefSeq ID table
 
