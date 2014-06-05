@@ -31,29 +31,42 @@ function renderPage(datum) {
     // Fill in our data table
     factbox.find('#dynamic-title').text(datum['genus'] + " " + datum['species']);
     factbox.find('#dynamic-phylum').text(datum['phylum']);
-    if (datum['atcc_id'] == "None") {
-        factbox.find('#dynamic-atcc').text("None");
-    } else {
+    if (datum['atcc_id']) {
         factbox.find('#dynamic-atcc a').attr('href', datum['atcc_id']);
         factbox.find('#dynamic-atcc a').text(datum['atcc_id']);
+
+    } else {
+        factbox.find('#dynamic-atcc').text("None");
     }
 
-    if (datum['dsmz_id'] == "None") {
-        factbox.find('#dynamic-dsmz').text("None");
-    } else {
+    if (datum['dsmz_id']) {
         factbox.find('#dynamic-dsmz a').attr('href', datum['dsmz_id']);
         factbox.find('#dynamic-dsmz a').text(datum['dsmz_id']);
+
+    } else {
+        factbox.find('#dynamic-dsmz').text("None");
     }
 
     factbox.find('#dynamic-well').text(datum['well']);
-    if (datum['ncbi_assembly'] == "None") {
-        factbox.find('#dynamic-references').text('None');
-    } else {
+    if (datum['ncbi_assembly']) {
         factbox.find('#dynamic-references a').attr('href', datum['ncbi_assembly']);
+    } else {
+        factbox.find('#dynamic-references').text('None');
+
     }
 
     // Make our RefSeq ID table
-
+    if (datum['refseq_ids']) {
+        console.log(datum['refseq_ids']);
+        var refseq_ids = datum['refseq_ids'].split('|');
+        var individual_refseq;
+        $.each(refseq_ids, function(index, chunk) {
+            console.log(chunk);
+            individual_refseq = chunk.split(',');
+            console.log(individual_refseq);
+            factbox.find('#dynamic-refseq-table tbody').append('<tr><td class="text-muted">' + individual_refseq[1] + '</td><td>' + individual_refseq[0] + '</td><td id="#refseq-' + index + '"></td></tr>');
+        });
+    }
 
 //    renderNCBIviewer(datum['refseq_ids']);
 }
@@ -80,4 +93,4 @@ typeahead_field.bind('typeahead:autocompleted', function(obj, datum, name) {
 // TODO: REMOVE THESE LINES WHEN IN PROD!
 strains.clearPrefetchCache();
 
-renderPage({"well":"A1","phylum":"Verrucomicrobia","genus":"Akkermansia","species":"muciniphila","atcc_id":"BAA-835","dsmz_id":"22959","ncbi_assembly":"https://www.ncbi.nlm.nih.gov/assembly/GCF_000020225.1/","refseq_ids":"NC_010655.1"});
+//renderPage(    {"well":"A11","phylum":"Firmicute","genus":"Eubacterium","species":"eligens","atcc_id":"27750","dsmz_id":"3376","ncbi_assembly":"https://www.ncbi.nlm.nih.gov/assembly/GCF_000146185.1/","refseq_ids":"Chromosome,NC_012778.1|Plasmid 1,NC_012782.1|Plasmid 2,NC_012780.1"});
