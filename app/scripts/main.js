@@ -69,6 +69,7 @@ function renderPage(datum) {
     // Make our RefSeq ID table
     factbox.find('#dynamic-refseq-select').find('option').remove();
     if (datum['refseq_ids'] || datum['wgs_contigs']) {
+        $('#sv1').show();
         factbox.find('#dynamic-refseq-select').prop('disabled', false);
 
         if (datum['refseq_ids']) {
@@ -106,6 +107,7 @@ function renderPage(datum) {
         renderNCBIviewer(factbox.find('#dynamic-refseq-select').val());
     } else {
         factbox.find('#dynamic-refseq-select').append('<option>(None currently available)</option>').prop('disabled', true);
+        $('#sv1').hide();
     }
 }
 
