@@ -116,13 +116,13 @@ var app;
 function renderNCBIviewer(id) {
     console.log('Rendering NCBI id: ' + id);
     if (app) {
-        console.log('app already exists');
-        app.load('embedded=true&multipanel=true&slim=false&id=' + id);
+        app.GI = id;
+        app.loadAccession();
     } else {
         Ext.onReady(function () {
-            console.log('making new app');
+            console.log('Creating new app.');
             app = new SeqView.App('sv1');
-            app.load('embedded=true&multipanel=true&slim=false&id=' + id);
+            app.load('embedded=true&multipanel=true&slim=false&appname=GordonLabMicrobialomics&id=' + id);
         });
     }
 }
