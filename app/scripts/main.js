@@ -10,7 +10,7 @@ var strains = new Bloodhound({
     prefetch: 'data/93genomes.json'
 });
 // Start loading the .json
-strains.initialize();
+var strain_promise = strains.initialize();
 
 var typeahead_field = $('.typeahead');
 
@@ -21,7 +21,7 @@ typeahead_field.typeahead(null, {
 });
 
 // Helper via https://stackoverflow.com/questions/6466135/adding-extra-zeros-in-front-of-a-number-using-jquery
-function pad (str, max) {
+function pad(str, max) {
     str = str.toString();
     return str.length < max ? pad("0" + str, max) : str;
 }
@@ -32,6 +32,7 @@ function renderPage(datum) {
     console.log('Render triggered.');
     $('.jumbotron').hide();
     factbox.show();
+    $('#browserButton').addClass('active');
 
     // Fill in our data table
     factbox.find('#dynamic-title').text(datum['genus'] + " " + datum['species']);
@@ -129,13 +130,39 @@ function renderNCBIviewer(id) {
     }
 }
 
-typeahead_field.bind('typeahead:selected', function(obj, datum, name) {
-    renderPage(datum);
+typeahead_field.bind('typeahead:selected', function(obj, datum, name) { renderPage(datum); });
+
+typeahead_field.bind('typeahead:autocompleted', function(obj, datum, name) { renderPage(datum); });
+
+// Hilarious button work for the modal
+$('#strain-table').on('show.bs.modal', function (e) { $('#strainListButton').addClass('active'); });
+
+$('#strain-table').on('hide.bs.modal', function (e) { $('#strainListButton').removeClass('active'); });
+
+// Pre-load our 93G table modal.
+$(window).load(function(){
+    // Promise less important since we don't load from Bloodhound
+    strain_promise.done(function(){
+        $.getJSON( "data/93genomes.json", function( data ) {
+            var strain_table_body = $("#strain-table-body");
+            $.each( data, function( key, val ) {
+                strain_table_body.append("<tr><td>" + val['well'] + "</td><td>" + val['genus'] + " " + val['species'] +
+                    "</td><td>" + val['phylum'] + "</td><td>" + val['atcc_id'] + "</td><td>" +  val['dsmz_id'] + "</td></tr>");
+                // Hack to patch up null values
+                strain_table_body.html(strain_table_body.html().replace('null','N/A'));
+            });
+            $("#strain-table-itself").dataTable();
+        });
+    });
 });
 
-typeahead_field.bind('typeahead:autocompleted', function(obj, datum, name) {
-    renderPage(datum);
-});
+//                       <tr>
+//                        <td>1</td>
+//                        <td>Mark</td>
+//                        <td>Otto</td>
+//                        <td>@mdo</td>
+//                    </tr>
+
 
 // TODO: REMOVE THESE LINES WHEN IN PROD!
 // strains.clearPrefetchCache();

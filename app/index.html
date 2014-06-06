@@ -19,6 +19,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="../bower_components/datatables/media/css/jquery.dataTables.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -47,10 +48,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#strains">Strain List</a></li>
-                <li><a href="#raw-data">Raw Data</a></li>
-                <li></li>
+                <li id="browserButton"><a href="#">Genome Browser</a></li>
+                <li id="strainListButton"><a href="#strains" data-toggle="modal" data-target="#strain-table">93G Strain List</a></li>
             </ul>
 
             <form class="navbar-form navbar-right" role="search">
@@ -71,7 +70,7 @@
     <div class="jumbotron">
         <h2>Microbial Genome Collection</h2>
         <p>&nbsp;</p>
-        <p>Please search for a strain in the upper right (or view the strain list).</p>
+        <p>Please search for a strain in the upper right (or click the strain list above).</p>
     </div>
 
     <div class="factbox" style="display:none;">
@@ -149,6 +148,34 @@
     </footer>
 </div> <!-- /container -->
 
+<!-- 93G Table of Strains (Modal Popover) -->
+<div class="modal fade" id="strain-table" tabindex="-1" role="dialog" aria-labelledby="strain-tableLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">93 Genomes Collection</h4>
+            </div>
+            <div class="modal-body" id="93g-strain-table-body">
+                <table class="table table-striped" id="strain-table-itself">
+                    <thead>
+                    <tr>
+                        <th>Well</th>
+                        <th>Strain</th>
+                        <th>Phylum</th>
+                        <th>ATCC ID</th>
+                        <th>DSMZ ID</th>
+                    </tr>
+                    </thead>
+                    <tbody id="strain-table-body"></tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- build:js scripts/vendor.js -->
 <!-- bower:js -->
@@ -164,14 +191,14 @@
         e=o.createElement(i);r=o.getElementsByTagName(i)[0];
         e.src='//www.google-analytics.com/analytics.js';
         r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-    ga('create','UA-XXXXX-X');ga('send','pageview');
+    ga('create','UA-25184331-2',{'cookieDomain':'wustl.edu','siteSpeedSampleRate':100});ga('send','pageview');
 </script>
 
 <!-- Crazy NCBI viewer code //-->
 <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/adapter/ext/ext-base.js"></script>
 <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/ext-all.js"></script>
 <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/sviewer/js/main.js"></script>
-<script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/jquery/jquery-1.7.2.js"></script>
+<!-- <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/jquery/jquery-1.7.2.js"></script> //-->
 <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/genome/trackmgr/0.3/js/tms-extern-unfilt.js"></script>
 
 
@@ -191,6 +218,8 @@
 
 <script src="../bower_components/typeahead.js/dist/typeahead.jquery.js"></script>
 <script src="../bower_components/typeahead.js/dist/bloodhound.js"></script>
+
+<script src="../bower_components/datatables/media/js/jquery.dataTables.js"></script>
 <!-- endbuild -->
 
 <!-- build:js({app,.tmp}) scripts/main.js -->
