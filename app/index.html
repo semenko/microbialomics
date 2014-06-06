@@ -8,12 +8,11 @@
     <meta name="author" content="Nick Semenkovich (@semenko) https://nick.semenkovich.com/">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
-<!--
-              <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/sv-cleanup.css">
-            <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/ext-all.css">
-            <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/xtheme-gray.css" id="theme">
-            <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/style.css" media="screen, projection, print">
-//-->
+    <!-- NCBI-specific styles //-->
+    <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/sv-cleanup.css">
+    <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/ext-all.css">
+    <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/xtheme-gray.css" id="theme">
+    <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/style.css" media="screen, projection, print">
 
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -75,62 +74,63 @@
         <p>Please search for a strain in the upper right (or view the strain list).</p>
     </div>
 
-    <div class="factbox row" style="display:none;">
-
-        <div class="col-md-8">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title" id="dynamic-title">&nbsp;</h3>
-                </div>
-                <div class="panel-body row">
-                    <div class="col-md-6">
-                        <table class="table table-condensed">
-                            <tbody>
-                            <tr>
-                                <td class="text-muted">Phylum</td>
-                                <td id="dynamic-phylum">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted">ATCC ID</td>
-                                <td id="dynamic-atcc"><a href="" target="_blank"></a> <span class="glyphicon glyphicon-share-alt text-muted"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted">DSMZ ID</td>
-                                <td id="dynamic-dsmz"><a href="" target="_blank"></a> <span class="glyphicon glyphicon-share-alt text-muted"></span></td>
-                            </tr>
-                            </tbody>
-                        </table>
+    <div class="factbox" style="display:none;">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="dynamic-title">&nbsp;</h3>
                     </div>
+                    <div class="panel-body row">
+                        <div class="col-md-6">
+                            <table class="table table-condensed">
+                                <tbody>
+                                <tr>
+                                    <td class="text-muted">Phylum</td>
+                                    <td id="dynamic-phylum">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">ATCC ID</td>
+                                    <td id="dynamic-atcc"><a href="" target="_blank"></a> <span class="glyphicon glyphicon-share-alt text-muted"></span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">DSMZ ID</td>
+                                    <td id="dynamic-dsmz"><a href="" target="_blank"></a> <span class="glyphicon glyphicon-share-alt text-muted"></span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                    <div class="col-md-6">
-                        <table class="table table-condensed">
-                            <tbody>
-                            <tr>
-                                <td class="text-muted">93G Well</td>
-                                <td id="dynamic-well">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="text-muted">References</td>
-                                <td>
-                                    <ul class="list-unstyled" id="dynamic-references"></ul>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="col-md-6">
+                            <table class="table table-condensed">
+                                <tbody>
+                                <tr>
+                                    <td class="text-muted">93G Well</td>
+                                    <td id="dynamic-well">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">References</td>
+                                    <td>
+                                        <ul class="list-unstyled" id="dynamic-references"></ul>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">NCBI RefSeq IDs</h3>
-                </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">NCBI RefSeq IDs</h3>
+                    </div>
 
-                <div class="panel-body">
-                    <em>Select an ID to load its track in the browser below.</em><br><br>
-                    <select class="form-control" id="dynamic-refseq-select"></select>
+                    <div class="panel-body">
+                        <em>Select an ID to load its track in the browser below.</em><br><br>
+                        <select class="form-control" id="dynamic-refseq-select"></select>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,13 +165,13 @@
     ga('create','UA-XXXXX-X');ga('send','pageview');
 </script>
 
-<!--
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/adapter/ext/ext-base.js"></script>
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/ext-all.js"></script>
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/sviewer/js/main.js"></script>
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/jquery/jquery-1.7.2.js"></script>
-        <script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/genome/trackmgr/0.3/js/tms-extern-unfilt.js"></script>
-//-->
+<!-- Crazy NCBI viewer code //-->
+<script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/ext-all.js"></script>
+<script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/sviewer/js/main.js"></script>
+<script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/core/jquery/jquery-1.7.2.js"></script>
+<script type="text/javascript" src="https://www.ncbi.nlm.nih.gov/projects/genome/trackmgr/0.3/js/tms-extern-unfilt.js"></script>
+
 
 <!-- build:js scripts/plugins.js -->
 <script src="../bower_components/bootstrap/js/affix.js"></script>

@@ -20,6 +20,12 @@ typeahead_field.typeahead(null, {
     source: strains.ttAdapter()
 });
 
+// Helper via https://stackoverflow.com/questions/6466135/adding-extra-zeros-in-front-of-a-number-using-jquery
+function pad (str, max) {
+    str = str.toString();
+    return str.length < max ? pad("0" + str, max) : str;
+}
+
 var factbox = $('.factbox');
 
 function renderPage(datum) {
@@ -76,22 +82,49 @@ function renderPage(datum) {
 
         if (datum['wgs_contigs']) {
             var wgs_contigs = datum['wgs_contigs'].split('-');
-            console.log(wgs_contigs);
+            console.log('Parsing WGS range: ' + wgs_contigs);
+            var lower_array = wgs_contigs[0].split(/[A-Z]/);
+            var upper_array = wgs_contigs[1].split(/[A-Z]/);
+
+            var lower_prefix = wgs_contigs[0].substr(0, lower_array.length - 1);
+            var upper_prefix = wgs_contigs[1].substr(0, upper_array.length - 1);
+            if (lower_prefix !== upper_prefix) {
+                alert('ERROR: Unable to parse contigs! ' + wgs_contigs);
+            }
+
+            var zeropad = lower_array[lower_array.length - 1].length;
+            var lower_limit = parseInt(lower_array[lower_array.length - 1]);
+            var upper_limit = parseInt(upper_array[upper_array.length - 1]);
+
+            var wgs_entry;
+            for (var i = lower_limit; i <= upper_limit; i += 1) {
+                wgs_entry = lower_prefix + pad(i, zeropad);
+                factbox.find('#dynamic-refseq-select').append('<option value="' + wgs_entry + '">' + wgs_entry + ' (contig)</option>');
+            }
         }
 
+        renderNCBIviewer(factbox.find('#dynamic-refseq-select').val());
     } else {
         factbox.find('#dynamic-refseq-select').append('<option>(None currently available)</option>').prop('disabled', true);
     }
-
-//    renderNCBIviewer(individual_refseq[0]);
 }
 
+// Listen to manual select dropdown changes
+$('#dynamic-refseq-select').change(function(data) { renderNCBIviewer($( this ).val()); } );
+
+var app;
 function renderNCBIviewer(id) {
     console.log('Rendering NCBI id: ' + id);
-    Ext.onReady(function(){
-        var app = new SeqView.App('sv1');
+    if (app) {
+        console.log('app already exists');
         app.load('embedded=true&multipanel=true&slim=false&id=' + id);
-    });
+    } else {
+        Ext.onReady(function () {
+            console.log('making new app');
+            app = new SeqView.App('sv1');
+            app.load('embedded=true&multipanel=true&slim=false&id=' + id);
+        });
+    }
 }
 
 typeahead_field.bind('typeahead:selected', function(obj, datum, name) {
