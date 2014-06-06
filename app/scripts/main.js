@@ -135,10 +135,5 @@ typeahead_field.bind('typeahead:autocompleted', function(obj, datum, name) {
     renderPage(datum);
 });
 
-//typeahead_field.bind('keypress', function(event) { if (event.which === 13) { renderNCBI(); } } );
-
-
 // TODO: REMOVE THESE LINES WHEN IN PROD!
-strains.clearPrefetchCache();
-
-//renderPage(    {"well":"A11","phylum":"Firmicute","genus":"Eubacterium","species":"eligens","atcc_id":"27750","dsmz_id":"3376","ncbi_assembly":"https://www.ncbi.nlm.nih.gov/assembly/GCF_000146185.1/","refseq_ids":"Chromosome,NC_012778.1|Plasmid 1,NC_012782.1|Plasmid 2,NC_012780.1"});
+// strains.clearPrefetchCache();
