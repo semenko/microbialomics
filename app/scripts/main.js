@@ -6,6 +6,7 @@ var strains = new Bloodhound({
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     limit: 15,
+    // Goog Docs -> JSON via https://blaiprat.github.io/tsvToJson/
     prefetch: '../data/93genomes.json'
 });
 // Start loading the .json
@@ -25,8 +26,6 @@ function renderPage(datum) {
     console.log('Render triggered.');
     $('.jumbotron').hide();
     factbox.show();
-
-    console.log(datum);
 
     // Fill in our data table
     factbox.find('#dynamic-title').text(datum['genus'] + " " + datum['species']);
@@ -48,27 +47,43 @@ function renderPage(datum) {
     }
 
     factbox.find('#dynamic-well').text(datum['well']);
-    if (datum['ncbi_assembly']) {
-        factbox.find('#dynamic-references a').attr('href', datum['ncbi_assembly']);
-    } else {
-        factbox.find('#dynamic-references').text('None');
 
+    var factbox_references = factbox.find('#dynamic-references');
+    factbox_references.text('');
+
+    if (datum['ncbi_assembly']) {
+        factbox_references.append('<li><a target="_blank" id="dynamic-references-ncbi">View NCBI Assembly</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
+        factbox_references.find('#dynamic-references-ncbi').attr('href', datum['ncbi_assembly']);
+    }
+    if (datum['taxonomy_url']) {
+        factbox_references.append('<li><a target="_blank" id="dynamic-references-taxonomy">Taxonomic Data & References</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
+        factbox_references.find('#dynamic-references-taxonomy').attr('href', datum['taxonomy_url']);
     }
 
     // Make our RefSeq ID table
-    if (datum['refseq_ids']) {
-        console.log(datum['refseq_ids']);
-        var refseq_ids = datum['refseq_ids'].split('|');
-        var individual_refseq;
-        $.each(refseq_ids, function(index, chunk) {
-            console.log(chunk);
-            individual_refseq = chunk.split(',');
-            console.log(individual_refseq);
-            factbox.find('#dynamic-refseq-table tbody').append('<tr><td class="text-muted">' + individual_refseq[1] + '</td><td>' + individual_refseq[0] + '</td><td id="#refseq-' + index + '"></td></tr>');
-        });
+    factbox.find('#dynamic-refseq-select').find('option').remove();
+    if (datum['refseq_ids'] || datum['wgs_contigs']) {
+        factbox.find('#dynamic-refseq-select').prop('disabled', false);
+
+        if (datum['refseq_ids']) {
+            var refseq_ids = datum['refseq_ids'].split('|');
+            var individual_refseq;
+            $.each(refseq_ids, function(index, chunk) {
+                individual_refseq = chunk.split(',');
+                factbox.find('#dynamic-refseq-select').append('<option value="' + individual_refseq[1] + '">' + individual_refseq[1] + ' (' + individual_refseq[0] + ')</option>');
+            });
+        }
+
+        if (datum['wgs_contigs']) {
+            var wgs_contigs = datum['wgs_contigs'].split('-');
+            console.log(wgs_contigs);
+        }
+
+    } else {
+        factbox.find('#dynamic-refseq-select').append('<option>(None currently available)</option>').prop('disabled', true);
     }
 
-//    renderNCBIviewer(datum['refseq_ids']);
+//    renderNCBIviewer(individual_refseq[0]);
 }
 
 function renderNCBIviewer(id) {

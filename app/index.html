@@ -8,12 +8,12 @@
     <meta name="author" content="Nick Semenkovich (@semenko) https://nick.semenkovich.com/">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 
-    <!--
+<!--
               <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/sv-cleanup.css">
             <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/ext-all.css">
             <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/core/extjs/ext-3.4.0/resources/css/xtheme-gray.css" id="theme">
             <link rel="stylesheet" type="text/css" href="https://www.ncbi.nlm.nih.gov/projects/sviewer/css/style.css" media="screen, projection, print">
-    //-->
+//-->
 
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -111,8 +111,8 @@
                             </tr>
                             <tr>
                                 <td class="text-muted">References</td>
-                                <td id="dynamic-references" colspan="2">
-                                    <a href="" target="_blank">See NCBI Assembly</a> <span class="glyphicon glyphicon-share-alt text-muted"></span>
+                                <td>
+                                    <ul class="list-unstyled" id="dynamic-references"></ul>
                                 </td>
                             </tr>
                             </tbody>
@@ -130,10 +130,7 @@
 
                 <div class="panel-body">
                     <em>Select an ID to load its track in the browser below.</em><br><br>
-                    <table class="table table-condensed" id="dynamic-refseq-table">
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <select class="form-control" id="dynamic-refseq-select"></select>
                 </div>
             </div>
         </div>
