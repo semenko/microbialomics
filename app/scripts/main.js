@@ -7,7 +7,7 @@ var strains = new Bloodhound({
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     limit: 15,
     // Goog Docs -> JSON via https://blaiprat.github.io/tsvToJson/
-    prefetch: '../data/93genomes.json'
+    prefetch: 'data/93genomes.json'
 });
 // Start loading the .json
 strains.initialize();
