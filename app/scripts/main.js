@@ -125,7 +125,7 @@ function renderNCBIviewer(id) {
         Ext.onReady(function () {
             console.log('Creating new app.');
             app = new SeqView.App('sv1');
-            app.load('embedded=true&multipanel=true&slim=false&appname=GordonLabMicrobialomics&id=' + id);
+            app.load('embedded=true&multipanel=true&slim=false&appname=GordonLabMicrobialomics&tracks=[key:gene_model_track,Options:ShowAll,CDSProductFeats:true]&id=' + id);
         });
     }
 }
