@@ -1,4 +1,4 @@
-microbialomics
+microbialomics [![Dependency Status](https://gemnasium.com/semenko/microbialomics.png)](https://gemnasium.com/semenko/microbialomics)
 ==============
 
 Visualize the 93-genome collection ("100 genomes") and programmatically retrieve gene calls &amp; other info.
