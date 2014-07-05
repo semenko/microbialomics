@@ -156,13 +156,5 @@ $(window).load(function(){
     });
 });
 
-//                       <tr>
-//                        <td>1</td>
-//                        <td>Mark</td>
-//                        <td>Otto</td>
-//                        <td>@mdo</td>
-//                    </tr>
-
-
 // TODO: REMOVE THESE LINES WHEN IN PROD!
 // strains.clearPrefetchCache();
