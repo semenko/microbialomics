@@ -114,9 +114,6 @@ function renderPage(datum) {
     }
 }
 
-// Listen to manual select dropdown changes
-$('#dynamic-refseq-select').change(function(data) { renderNCBIviewer($( this ).val()); } );
-
 var app;
 function renderNCBIviewer(id) {
     console.log('Rendering NCBI id: ' + id);
@@ -131,6 +128,9 @@ function renderNCBIviewer(id) {
         });
     }
 }
+
+// Listen to manual select dropdown changes
+$('#dynamic-refseq-select').change(function(data) { renderNCBIviewer($( this ).val()); } );
 
 typeahead_field.bind('typeahead:selected', function(obj, datum, name) { renderPage(datum); });
 
