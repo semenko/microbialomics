@@ -2,7 +2,7 @@
 
 var strains = new Bloodhound({
     datumTokenizer: function(d) {
-        return Bloodhound.tokenizers.whitespace(d['genus']).concat(Bloodhound.tokenizers.whitespace(d['species']));
+        return Bloodhound.tokenizers.whitespace(d.genus).concat(Bloodhound.tokenizers.whitespace(d.species));
     },
     queryTokenizer: Bloodhound.tokenizers.whitespace,
     limit: 15,
@@ -16,7 +16,7 @@ var typeahead_field = $('.typeahead');
 
 typeahead_field.typeahead(null, {
     name: 'strains',
-    displayKey: function(strain) { return strain['genus'] + " " + strain['species']; },
+    displayKey: function(strain) { return strain.genus + " " + strain.species; },
     source: strains.ttAdapter()
 });
 
@@ -35,46 +35,46 @@ function renderPage(datum) {
     $('#browserButton').addClass('active');
 
     // Fill in our data table
-    factbox.find('#dynamic-title').text(datum['genus'] + " " + datum['species']);
-    factbox.find('#dynamic-phylum').text(datum['phylum']);
-    if (datum['atcc_id']) {
-        factbox.find('#dynamic-atcc a').attr('href', 'https://www.atcc.org/products/all/' + datum['atcc_id'] + '.aspx');
-        factbox.find('#dynamic-atcc a').text(datum['atcc_id']);
+    factbox.find('#dynamic-title').text(datum.genus + " " + datum.species);
+    factbox.find('#dynamic-phylum').text(datum.phylum);
+    if (datum.atcc_id) {
+        factbox.find('#dynamic-atcc a').attr('href', 'https://www.atcc.org/products/all/' + datum.atcc_id + '.aspx');
+        factbox.find('#dynamic-atcc a').text(datum.atcc_id);
 
     } else {
         factbox.find('#dynamic-atcc').text("None");
     }
 
-    if (datum['dsmz_id']) {
-        factbox.find('#dynamic-dsmz a').attr('href', 'https://www.dsmz.de/catalogues/details/culture/DSM-' + datum['dsmz_id'] + '.html');
-        factbox.find('#dynamic-dsmz a').text(datum['dsmz_id']);
+    if (datum.dsmz_id) {
+        factbox.find('#dynamic-dsmz a').attr('href', 'https://www.dsmz.de/catalogues/details/culture/DSM-' + datum.dsmz_id + '.html');
+        factbox.find('#dynamic-dsmz a').text(datum.dsmz_id);
 
     } else {
         factbox.find('#dynamic-dsmz').text("None");
     }
 
-    factbox.find('#dynamic-well').text(datum['well']);
+    factbox.find('#dynamic-well').text(datum.well);
 
     var factbox_references = factbox.find('#dynamic-references');
     factbox_references.text('');
 
-    if (datum['ncbi_assembly']) {
+    if (datum.ncbi_assembly) {
         factbox_references.append('<li><a target="_blank" id="dynamic-references-ncbi">View NCBI Assembly</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
-        factbox_references.find('#dynamic-references-ncbi').attr('href', datum['ncbi_assembly']);
+        factbox_references.find('#dynamic-references-ncbi').attr('href', datum.ncbi_assembly);
     }
-    if (datum['taxonomy_url']) {
+    if (datum.taxonomy_url) {
         factbox_references.append('<li><a target="_blank" id="dynamic-references-taxonomy">Taxonomic Data & References</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
-        factbox_references.find('#dynamic-references-taxonomy').attr('href', datum['taxonomy_url']);
+        factbox_references.find('#dynamic-references-taxonomy').attr('href', datum.taxonomy_url);
     }
 
     // Make our RefSeq ID table
     factbox.find('#dynamic-refseq-select').find('option').remove();
-    if (datum['refseq_ids'] || datum['wgs_contigs']) {
+    if (datum.refseq_ids || datum.wgs_contigs) {
         $('#sv1').show();
         factbox.find('#dynamic-refseq-select').prop('disabled', false);
 
-        if (datum['refseq_ids']) {
-            var refseq_ids = datum['refseq_ids'].split('|');
+        if (datum.refseq_ids) {
+            var refseq_ids = datum.refseq_ids.split('|');
             var individual_refseq;
             $.each(refseq_ids, function(index, chunk) {
                 individual_refseq = chunk.split(',');
@@ -82,8 +82,8 @@ function renderPage(datum) {
             });
         }
 
-        if (datum['wgs_contigs']) {
-            var wgs_contigs = datum['wgs_contigs'].split('-');
+        if (datum.wgs_contigs) {
+            var wgs_contigs = datum.wgs_contigs.split('-');
             console.log('Parsing WGS range: ' + wgs_contigs);
             var lower_array = wgs_contigs[0].split(/[A-Z]/);
             var upper_array = wgs_contigs[1].split(/[A-Z]/);
@@ -146,8 +146,8 @@ $(window).load(function(){
         $.getJSON( "data/93genomes.json", function( data ) {
             var strain_table_body = $("#strain-table-body");
             $.each( data, function( key, val ) {
-                strain_table_body.append("<tr><td>" + val['well'] + "</td><td>" + val['genus'] + " " + val['species'] +
-                    "</td><td>" + val['phylum'] + "</td><td>" + val['atcc_id'] + "</td><td>" +  val['dsmz_id'] + "</td></tr>");
+                strain_table_body.append("<tr><td>" + val.well + "</td><td>" + val.genus + " " + val.species +
+                    "</td><td>" + val.phylum + "</td><td>" + val.atcc_id + "</td><td>" +  val.dsmz_id + "</td></tr>");
                 // Hack to patch up null values
                 strain_table_body.html(strain_table_body.html().replace('null','N/A'));
             });
