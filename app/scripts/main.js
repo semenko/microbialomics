@@ -1,4 +1,5 @@
-/*jshint camelcase: false */
+/*jshint camelcase:false, devel:true*/
+/*global Bloodhound:false, renderNCBIviewer:false, Ext:false, SeqView:false*/
 'use strict';
 
 var strains = new Bloodhound({
@@ -144,15 +145,15 @@ $('#strain-table').on('hide.bs.modal', function (e) { $('#strainListButton').rem
 $(window).load(function(){
     // Promise less important since we don't load from Bloodhound
     strain_promise.done(function(){
-        $.getJSON( "data/93genomes.json", function( data ) {
-            var strain_table_body = $("#strain-table-body");
+        $.getJSON('data/93genomes.json', function( data ) {
+            var strain_table_body = $('#strain-table-body');
             $.each( data, function( key, val ) {
-                strain_table_body.append("<tr><td>" + val.well + "</td><td>" + val.genus + " " + val.species +
-                    "</td><td>" + val.phylum + "</td><td>" + val.atcc_id + "</td><td>" +  val.dsmz_id + "</td></tr>");
+                strain_table_body.append('<tr><td>' + val.well + '</td><td>' + val.genus + ' ' + val.species +
+                    '</td><td>' + val.phylum + '</td><td>' + val.atcc_id + '</td><td>' +  val.dsmz_id + '</td></tr>');
                 // Hack to patch up null values
                 strain_table_body.html(strain_table_body.html().replace('null','N/A'));
             });
-            $("#strain-table-itself").dataTable();
+            $('#strain-table-itself').dataTable();
         });
     });
 });
