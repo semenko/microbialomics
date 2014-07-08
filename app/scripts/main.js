@@ -1,4 +1,5 @@
-"use strict";
+/*jshint camelcase: false */
+'use strict';
 
 var strains = new Bloodhound({
     datumTokenizer: function(d) {
@@ -16,14 +17,14 @@ var typeahead_field = $('.typeahead');
 
 typeahead_field.typeahead(null, {
     name: 'strains',
-    displayKey: function(strain) { return strain.genus + " " + strain.species; },
+    displayKey: function(strain) { return strain.genus + ' ' + strain.species; },
     source: strains.ttAdapter()
 });
 
 // Helper via https://stackoverflow.com/questions/6466135/adding-extra-zeros-in-front-of-a-number-using-jquery
 function pad(str, max) {
     str = str.toString();
-    return str.length < max ? pad("0" + str, max) : str;
+    return str.length < max ? pad('0' + str, max) : str;
 }
 
 var factbox = $('.factbox');
@@ -35,14 +36,14 @@ function renderPage(datum) {
     $('#browserButton').addClass('active');
 
     // Fill in our data table
-    factbox.find('#dynamic-title').text(datum.genus + " " + datum.species);
+    factbox.find('#dynamic-title').text(datum.genus + ' ' + datum.species);
     factbox.find('#dynamic-phylum').text(datum.phylum);
     if (datum.atcc_id) {
         factbox.find('#dynamic-atcc a').attr('href', 'https://www.atcc.org/products/all/' + datum.atcc_id + '.aspx');
         factbox.find('#dynamic-atcc a').text(datum.atcc_id);
 
     } else {
-        factbox.find('#dynamic-atcc').text("None");
+        factbox.find('#dynamic-atcc').text('None');
     }
 
     if (datum.dsmz_id) {
@@ -50,7 +51,7 @@ function renderPage(datum) {
         factbox.find('#dynamic-dsmz a').text(datum.dsmz_id);
 
     } else {
-        factbox.find('#dynamic-dsmz').text("None");
+        factbox.find('#dynamic-dsmz').text('None');
     }
 
     factbox.find('#dynamic-well').text(datum.well);
