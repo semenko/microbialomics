@@ -11,4 +11,5 @@ dist
 app/bower_components
 aws-keys.json
 bower_components
+validation-status.json
 test/bower_components
