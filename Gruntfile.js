@@ -134,6 +134,18 @@ module.exports = function (grunt) {
             ]
         },
 
+        validation: {
+            options: {
+                reset: true,
+                stoponerror: false,
+                reportpath: false,
+                relaxerror: ['Bad value X-UA-Compatible for attribute http-equiv on element meta.']
+            },
+            files: {
+                src: ['<%= config.app %>/*.html']
+            }
+        },
+
         // Mocha testing framework configuration options
         mocha: {
             all: {
@@ -360,7 +372,8 @@ module.exports = function (grunt) {
         grunt.task.run([
             'connect:test',
             // 'mocha', // No Mocha tests (yet)
-            'jshint'
+            'jshint',
+            'validation'
         ]);
     });
 
