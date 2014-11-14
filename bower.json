@@ -2,7 +2,7 @@
   "name": "microbialomics",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.2.0",
+    "bootstrap": "^3.3.1",
     "jquery": "^2.1.1",
     "typeahead.js": "~0.10.5",
     "datatables": "~1.10.3"
