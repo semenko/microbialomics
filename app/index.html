@@ -48,7 +48,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li id="browserButton"><a href="#">Genome Browser</a></li>
+                <li id="browserButton" tabindex="0" data-container="body" data-toggle="popover" data-placement="bottom" data-trigger="focus"
+                    data-content="Try searching for a bacterial strain using the box in the upper right."><a href="#">Genome Browser</a></li>
                 <li id="strainListButton"><a href="#strains" data-toggle="modal" data-target="#strain-table">93G Strain List</a></li>
             </ul>
 
@@ -70,7 +71,8 @@
     <div class="jumbotron">
         <h2>Microbial Genome Collection</h2>
         <p>&nbsp;</p>
-        <p>Please search for a strain in the upper right (or click the strain list above).</p>
+        <p class="lede">Please search for a strain in the upper right (or click the strain list above).</p>
+        <p>This site houses the genomes &amp; data for the Gordon Lab "93 genomes" defined culture collection.</p>
     </div>
 
     <div class="factbox" style="display:none;">

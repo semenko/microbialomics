@@ -2,6 +2,11 @@
 /*global Bloodhound:false, renderNCBIviewer:false, Ext:false, SeqView:false*/
 'use strict';
 
+// Enable Bootstrap popover code
+$(function () {
+  $('[data-toggle="popover"]').popover();
+});
+
 var strains = new Bloodhound({
     datumTokenizer: function(d) {
         return Bloodhound.tokenizers.whitespace(d.genus).concat(Bloodhound.tokenizers.whitespace(d.species));
