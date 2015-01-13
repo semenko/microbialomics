@@ -2,7 +2,7 @@ microbialomics [![Build Status](https://travis-ci.org/semenko/microbialomics.svg
 
 ==============
 
-Visualize the 93-genome collection ("100 genomes") and programmatically retrieve gene calls &amp; other info.
+Visualize the 93-genome collection ("100 genomes") and programmatically retrieve gene calls &amp; other info. Live at https://microbialomics.wustl.edu/
 
 
 ## Getting started
@@ -20,6 +20,6 @@ Visualize the 93-genome collection ("100 genomes") and programmatically retrieve
 + https://nick.semenkovich.com/
 
 ## License
-Copyright 2014, Nick Semenkovich \<semenko@alum.mit.edu\> for the Gordon Lab at WashU.
+Copyright 2014-2015, Nick Semenkovich \<semenko@alum.mit.edu\> for the Gordon Lab at WashU in St. Louis.
 
 Released under the MIT License. See LICENSE for details.
