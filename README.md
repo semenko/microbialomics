@@ -5,6 +5,8 @@ Visualize the 93-genome collection ("100 genomes") and programmatically retrieve
 
 See it live at https://microbialomics.wustl.edu/
 
+![Example Track Viewer](/../screenshots-for-readme/01-main-screenshot.png?raw=true "Example Track Viewer")
+
 ## Getting started
 1. Clone this repo: `git clone https://github.com/semenko/microbialomics.git`
 2. `cd microbialomics`
