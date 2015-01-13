@@ -1,4 +1,5 @@
-microbialomics [![Build Status](https://travis-ci.org/semenko/microbialomics.svg?branch=master)](https://travis-ci.org/semenko/microbialomics) [![Dependency Status](https://gemnasium.com/semenko/microbialomics.png)](https://gemnasium.com/semenko/microbialomics)
+microbialomics [![Build Status](https://travis-ci.org/semenko/microbialomics.svg?branch=master)](https://travis-ci.org/semenko/microbialomics) [![Dependency Status](https://gemnasium.com/semenko/microbialomics.png)](https://gemnasium.com/semenko/microbialomics) [![Dev Dependency Status](https://david-dm.org/semenko/microbialomics/dev-status.svg?theme=shields.io)](https://david-dm.org/semenko/microbialomics#info=devDependencies)
+
 ==============
 
 Visualize the 93-genome collection ("100 genomes") and programmatically retrieve gene calls &amp; other info.
