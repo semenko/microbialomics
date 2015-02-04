@@ -41,38 +41,8 @@ function renderPage(datum) {
     factbox.show();
     $('#browserButton').addClass('active');
 
-    // Fill in our data table
-    factbox.find('#dynamic-title').text(datum.genus + ' ' + datum.species);
-    factbox.find('#dynamic-phylum').text(datum.phylum);
-    if (datum.atcc_id) {
-        factbox.find('#dynamic-atcc a').attr('href', 'https://www.atcc.org/products/all/' + datum.atcc_id + '.aspx');
-        factbox.find('#dynamic-atcc a').text(datum.atcc_id);
-
-    } else {
-        factbox.find('#dynamic-atcc').text('None');
-    }
-
-    if (datum.dsmz_id) {
-        factbox.find('#dynamic-dsmz a').attr('href', 'https://www.dsmz.de/catalogues/details/culture/DSM-' + datum.dsmz_id + '.html');
-        factbox.find('#dynamic-dsmz a').text(datum.dsmz_id);
-
-    } else {
-        factbox.find('#dynamic-dsmz').text('None');
-    }
-
-    factbox.find('#dynamic-well').text(datum.well);
-
-    var factbox_references = factbox.find('#dynamic-references');
-    factbox_references.text('');
-
-    if (datum.ncbi_assembly) {
-        factbox_references.append('<li><a target="_blank" id="dynamic-references-ncbi">View NCBI Assembly</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
-        factbox_references.find('#dynamic-references-ncbi').attr('href', datum.ncbi_assembly);
-    }
-    if (datum.taxonomy_url) {
-        factbox_references.append('<li><a target="_blank" id="dynamic-references-taxonomy">Taxonomic Data & References</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
-        factbox_references.find('#dynamic-references-taxonomy').attr('href', datum.taxonomy_url);
-    }
+    // Fill out the raw data table
+    renderDataTable(datum);
 
     // Make our RefSeq ID table
     factbox.find('#dynamic-refseq-select').find('option').remove();
@@ -116,6 +86,43 @@ function renderPage(datum) {
     } else {
         factbox.find('#dynamic-refseq-select').append('<option>(None currently available)</option>').prop('disabled', true);
         $('#sv1').hide();
+    }
+}
+
+function renderDataTable(datum) {
+    // Fill in the factual metadata in the data table
+    // Called by renderPage() above.
+
+    factbox.find('#dynamic-title').text(datum.genus + ' ' + datum.species);
+    factbox.find('#dynamic-phylum').text(datum.phylum);
+    if (datum.atcc_id) {
+        factbox.find('#dynamic-atcc a').attr('href', 'https://www.atcc.org/products/all/' + datum.atcc_id + '.aspx');
+        factbox.find('#dynamic-atcc a').text(datum.atcc_id);
+
+    } else {
+        factbox.find('#dynamic-atcc').text('None');
+    }
+
+    if (datum.dsmz_id) {
+        factbox.find('#dynamic-dsmz a').attr('href', 'https://www.dsmz.de/catalogues/details/culture/DSM-' + datum.dsmz_id + '.html');
+        factbox.find('#dynamic-dsmz a').text(datum.dsmz_id);
+
+    } else {
+        factbox.find('#dynamic-dsmz').text('None');
+    }
+
+    factbox.find('#dynamic-well').text(datum.well);
+
+    var factbox_references = factbox.find('#dynamic-references');
+    factbox_references.text('');
+
+    if (datum.ncbi_assembly) {
+        factbox_references.append('<li><a target="_blank" id="dynamic-references-ncbi">View NCBI Assembly</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
+        factbox_references.find('#dynamic-references-ncbi').attr('href', datum.ncbi_assembly);
+    }
+    if (datum.taxonomy_url) {
+        factbox_references.append('<li><a target="_blank" id="dynamic-references-taxonomy">Taxonomic Data & References</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
+        factbox_references.find('#dynamic-references-taxonomy').attr('href', datum.taxonomy_url);
     }
 }
 
