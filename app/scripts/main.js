@@ -4,7 +4,7 @@
 
 // Enable Bootstrap popover code
 $(function () {
-  $('[data-toggle="popover"]').popover();
+    $('[data-toggle="popover"]').popover();
 });
 
 var strains = new Bloodhound({
@@ -35,63 +35,9 @@ function pad(str, max) {
 
 var factbox = $('.factbox');
 
-function renderPage(datum) {
-    console.log('Render triggered.');
-    $('.jumbotron').hide();
-    factbox.show();
-    $('#browserButton').addClass('active');
-
-    // Fill out the raw data table
-    renderDataTable(datum);
-
-    // Make our RefSeq ID table
-    factbox.find('#dynamic-refseq-select').find('option').remove();
-    if (datum.refseq_ids || datum.wgs_contigs) {
-        $('#sv1').show();
-        factbox.find('#dynamic-refseq-select').prop('disabled', false);
-
-        if (datum.refseq_ids) {
-            var refseq_ids = datum.refseq_ids.split('|');
-            var individual_refseq;
-            $.each(refseq_ids, function(index, chunk) {
-                individual_refseq = chunk.split(',');
-                factbox.find('#dynamic-refseq-select').append('<option value="' + individual_refseq[1] + '">' + individual_refseq[1] + ' (' + individual_refseq[0] + ')</option>');
-            });
-        }
-
-        if (datum.wgs_contigs) {
-            var wgs_contigs = datum.wgs_contigs.split('-');
-            console.log('Parsing WGS range: ' + wgs_contigs);
-            var lower_array = wgs_contigs[0].split(/[A-Z]/);
-            var upper_array = wgs_contigs[1].split(/[A-Z]/);
-
-            var lower_prefix = wgs_contigs[0].substr(0, lower_array.length - 1);
-            var upper_prefix = wgs_contigs[1].substr(0, upper_array.length - 1);
-            if (lower_prefix !== upper_prefix) {
-                alert('ERROR: Unable to parse contigs! ' + wgs_contigs);
-            }
-
-            var zeropad = lower_array[lower_array.length - 1].length;
-            var lower_limit = parseInt(lower_array[lower_array.length - 1]);
-            var upper_limit = parseInt(upper_array[upper_array.length - 1]);
-
-            var wgs_entry;
-            for (var i = lower_limit; i <= upper_limit; i += 1) {
-                wgs_entry = lower_prefix + pad(i, zeropad);
-                factbox.find('#dynamic-refseq-select').append('<option value="' + wgs_entry + '">' + wgs_entry + ' (contig)</option>');
-            }
-        }
-
-        renderNCBIviewer(factbox.find('#dynamic-refseq-select').val());
-    } else {
-        factbox.find('#dynamic-refseq-select').append('<option>(None currently available)</option>').prop('disabled', true);
-        $('#sv1').hide();
-    }
-}
-
 function renderDataTable(datum) {
     // Fill in the factual metadata in the data table
-    // Called by renderPage() above.
+    // Called by renderPage() below.
 
     factbox.find('#dynamic-title').text(datum.genus + ' ' + datum.species);
     factbox.find('#dynamic-phylum').text(datum.phylum);
@@ -124,6 +70,65 @@ function renderDataTable(datum) {
         factbox_references.append('<li><a target="_blank" id="dynamic-references-taxonomy">Taxonomic Data & References</a> <span class="glyphicon glyphicon-share-alt text-muted"></span></li>');
         factbox_references.find('#dynamic-references-taxonomy').attr('href', datum.taxonomy_url);
     }
+}
+
+function renderRefSeqTable(datum) {
+    var refSeqSelect = factbox.find('#dynamic-refseq-select');
+    refSeqSelect.find('option').remove();
+    if (datum.refseq_ids || datum.wgs_contigs) {
+        $('#sv1').show();
+        refSeqSelect.prop('disabled', false);
+
+        if (datum.refseq_ids) {
+            var refseq_ids = datum.refseq_ids.split('|');
+            var individual_refseq;
+            $.each(refseq_ids, function(index, chunk) {
+                individual_refseq = chunk.split(',');
+                refSeqSelect.append('<option value="' + individual_refseq[1] + '">' + individual_refseq[1] + ' (' + individual_refseq[0] + ')</option>');
+            });
+        }
+
+        if (datum.wgs_contigs) {
+            var wgs_contigs = datum.wgs_contigs.split('-');
+            console.log('Parsing WGS range: ' + wgs_contigs);
+            var lower_array = wgs_contigs[0].split(/[A-Z]/);
+            var upper_array = wgs_contigs[1].split(/[A-Z]/);
+
+            var lower_prefix = wgs_contigs[0].substr(0, lower_array.length - 1);
+            var upper_prefix = wgs_contigs[1].substr(0, upper_array.length - 1);
+            if (lower_prefix !== upper_prefix) {
+                alert('ERROR: Unable to parse contigs! ' + wgs_contigs);
+            }
+
+            var zeropad = lower_array[lower_array.length - 1].length;
+            var lower_limit = parseInt(lower_array[lower_array.length - 1]);
+            var upper_limit = parseInt(upper_array[upper_array.length - 1]);
+
+            var wgs_entry;
+            for (var i = lower_limit; i <= upper_limit; i += 1) {
+                wgs_entry = lower_prefix + pad(i, zeropad);
+                refSeqSelect.append('<option value="' + wgs_entry + '">' + wgs_entry + ' (contig)</option>');
+            }
+        }
+
+        renderNCBIviewer(refSeqSelect.val());
+    } else {
+        refSeqSelect.append('<option>(None currently available)</option>').prop('disabled', true);
+        $('#sv1').hide();
+    }
+}
+
+function renderPage(datum) {
+    console.log('Render triggered.');
+    $('.jumbotron').hide();
+    factbox.show();
+    $('#browserButton').addClass('active');
+
+    // Fill out the raw data table
+    renderDataTable(datum);
+
+    // And make the RefSeq ID table
+    renderRefSeqTable(datum);
 }
 
 var app;
@@ -161,7 +166,7 @@ $(window).load(function(){
             var strain_table_body = $('#strain-table-body');
             $.each( data, function( key, val ) {
                 strain_table_body.append('<tr><td>' + val.well + '</td><td>' + val.genus + ' ' + val.species +
-                    '</td><td>' + val.phylum + '</td><td>' + val.atcc_id + '</td><td>' +  val.dsmz_id + '</td></tr>');
+                '</td><td>' + val.phylum + '</td><td>' + val.atcc_id + '</td><td>' +  val.dsmz_id + '</td></tr>');
                 // Hack to patch up null values
                 strain_table_body.html(strain_table_body.html().replace('null','N/A'));
             });
