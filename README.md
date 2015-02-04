@@ -1,5 +1,7 @@
-microbialomics [![Build Status](https://travis-ci.org/semenko/microbialomics.svg?branch=master)](https://travis-ci.org/semenko/microbialomics) [![Dependency Status](https://www.versioneye.com/user/projects/54d24e843ca0849531000133/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54d24e843ca0849531000133) [![Dev Dependency Status](https://david-dm.org/semenko/microbialomics/dev-status.svg?theme=shields.io)](https://david-dm.org/semenko/microbialomics#info=devDependencies)
+microbialomics
 ==============
+[![Build Status](https://travis-ci.org/semenko/microbialomics.svg?branch=master)](https://travis-ci.org/semenko/microbialomics) [![Dependency Status](https://www.versioneye.com/user/projects/54d24e843ca0849531000133/badge.svg?style=flat)](https://www.versioneye.com/user/projects/54d24e843ca0849531000133) [![Dev Dependency Status](https://david-dm.org/semenko/microbialomics/dev-status.svg?theme=shields.io)](https://david-dm.org/semenko/microbialomics#info=devDependencies) [![Code Climate](https://codeclimate.com/github/semenko/microbialomics/badges/gpa.svg)](https://codeclimate.com/github/semenko/microbialomics)
+
 
 Visualize the 93-genome collection ("100 genomes") and programmatically retrieve gene calls &amp; other info.
 
