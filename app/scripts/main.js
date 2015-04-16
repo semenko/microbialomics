@@ -1,4 +1,4 @@
-/*jshint camelcase:false, devel:true, scripturl:false*/
+/*jshint camelcase:false, devel:true, scripturl:true*/
 /*global Bloodhound:false, renderNCBIviewer:false, Ext:false, SeqView:false*/
 'use strict';
 
