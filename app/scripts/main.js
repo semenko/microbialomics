@@ -41,20 +41,18 @@ function renderDataTable(datum) {
 
     factbox.find('#dynamic-title').text(datum.genus + ' ' + datum.species);
     factbox.find('#dynamic-phylum').text(datum.phylum);
-    if (datum.atcc_id) {
-        factbox.find('#dynamic-atcc a').attr('href', 'https://www.atcc.org/products/all/' + datum.atcc_id + '.aspx');
-        factbox.find('#dynamic-atcc a').text(datum.atcc_id);
 
-    } else {
-        factbox.find('#dynamic-atcc').text('None');
+    var dynamic_atcc = factbox.find('#dynamic-atcc a');
+    var dynamic_dsmz = factbox.find('#dynamic-dsmz a');
+    dynamic_atcc.attr('href', 'javascript:;').text('None');
+    dynamic_dsmz.attr('href', 'javascript:;').text('None');
+
+    if (datum.atcc_id) {
+        dynamic_atcc.attr('href', 'https://www.atcc.org/products/all/' + datum.atcc_id + '.aspx').text(datum.atcc_id);
     }
 
     if (datum.dsmz_id) {
-        factbox.find('#dynamic-dsmz a').attr('href', 'https://www.dsmz.de/catalogues/details/culture/DSM-' + datum.dsmz_id + '.html');
-        factbox.find('#dynamic-dsmz a').text(datum.dsmz_id);
-
-    } else {
-        factbox.find('#dynamic-dsmz').text('None');
+        dynamic_dsmz.attr('href', 'https://www.dsmz.de/catalogues/details/culture/DSM-' + datum.dsmz_id + '.html').text(datum.dsmz_id);
     }
 
     factbox.find('#dynamic-well').text(datum.well);
