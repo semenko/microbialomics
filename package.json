@@ -1,36 +1,37 @@
 {
-    "name": "microbialomics",
-    "version": "0.1.0",
-    "dependencies": {},
-    "devDependencies": {
-        "grunt": "~0.4.5",
-        "grunt-autoprefixer": "~3.0.0",
-        "grunt-concurrent": "~2.0.0",
-        "grunt-contrib-clean": "~0.6.0",
-        "grunt-contrib-concat": "~0.5.1",
-        "grunt-contrib-connect": "~0.10.1",
-        "grunt-contrib-copy": "~0.8.0",
-	"grunt-contrib-cssmin": "~0.12.2",
-        "grunt-contrib-htmlmin": "~0.4.0",
-        "grunt-contrib-imagemin": "~0.9.4",
-	"grunt-contrib-jshint": "~0.11.2",
-        "grunt-contrib-uglify": "~0.9.1",
-        "grunt-bower-install": "~1.6.0",
-        "grunt-contrib-watch": "~0.6.1",
-        "grunt-html-validation": "~0.1.18",
-        "grunt-rev": "~0.1.0",
-        "grunt-usemin": "~3.0.0",
-        "grunt-mocha": "~0.4.12",
-        "grunt-newer": "~1.1.0",
-        "grunt-svgmin": "~2.0.1",
-        "jshint-stylish": "~2.0.1",
-        "load-grunt-tasks": "~3.2.0",
-        "time-grunt": "~1.2.1"
-    },
-    "engines": {
-        "node": ">=0.10.0"
-    },
-    "scripts": {
-        "test": "grunt test"
-    }
+  "name": "microbialomics",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-autoprefixer": "~3.0.0",
+    "grunt-bower-install": "~1.6.0",
+    "grunt-concurrent": "~2.0.0",
+    "grunt-contrib-clean": "~0.6.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-connect": "^0.11.2",
+    "grunt-contrib-copy": "~0.8.0",
+    "grunt-contrib-cssmin": "~0.14.0",
+    "grunt-contrib-htmlmin": "~0.5.0",
+    "grunt-contrib-imagemin": "~0.9.4",
+    "grunt-contrib-jshint": "~0.11.2",
+    "grunt-contrib-uglify": "~0.9.1",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-html-validation": "~0.1.18",
+    "grunt-mocha": "~0.4.12",
+    "grunt-newer": "~1.1.0",
+    "grunt-rev": "~0.1.0",
+    "grunt-svgmin": "~2.0.1",
+    "grunt-usemin": "~3.1.1",
+    "jshint-stylish": "~2.0.1",
+    "load-grunt-tasks": "~3.3.0",
+    "serve-static": "^1.10.0",
+    "time-grunt": "~1.2.1"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
 }
